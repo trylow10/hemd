@@ -1,18 +1,35 @@
+import localFont from "next/font/local";
 import "./globals.css";
 
+import { ThemeProvider } from "@components/providers/theme-provider";
+
+import { Header } from "@/components/layouts/header";
+import { Footer } from "@/components/layouts/footer";
+
 export const metadata = {
-  title: "META Research Group",
-  description: "Welcome to the META Research Group website",
+  title: "HEMD",
+  description: "Research and Development",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import { ReactNode } from "react";
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gray-100 text-gray-900">{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="h-[calc(100vh-94px)] overflow-y-auto">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
